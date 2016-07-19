@@ -16,11 +16,16 @@ exports.findAllPersonas = function(req, res) {
 };
 
 //GET - Return a Persona with specified ID
-exports.findById = function(req, res) {
+/*exports.findById = function(req, res) {
     Persona.findById(req.params.id, function(err, persona) {
         if(err) return res.send(500, err.message);
+        res.status(200).jsonp(persona);
+    });
+};*/
 
-        console.log('GET /persona/' + req.params.id);
+exports.findByRUT = function(req, res) {
+    Persona.find({rut: req.params.rut}, function(err, persona) {
+        if(err) return res.send(500, err.message);
         res.status(200).jsonp(persona);
     });
 };

@@ -17,7 +17,8 @@ exports = module.exports = function(app, mongoose) {
             type: String,
             enum: ['BE', 'BC', 'BI', 'SB', 'BCI', 'CB', 'BICE', 'HSBC', 'BS', 'ITAU',
                 'BTM', 'BSEC', 'BF', 'BR', 'BCON', 'BP', 'BBVA', 'COOP']
-        }
+        },
+        referredBy: 		{ type: String }
     });
 
     mongoose.model('Persona', personaSchema);
