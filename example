@@ -1,2 +1,14 @@
-db.persona.insert({'fullname' : 'test1','rut' : 'test1@test.com','telephone' : '34324','address' : 27,'email' : 'San Francisco','password' : 'Male','accountOwner' : 'test1@test.com','accountRut' : 'Bob Smith','accountNumber: ' : 27,'bankName' : 'San Francisco'})
+db.persona.insert({
+                  	"fullName": "test1",
+                  	"rut": "test1test",
+                  	"telephone": 34324,
+                  	"address": "tretert",
+                  	"email": "San Francisco",
+                  	"password": "Male",
+                  	"accountOwner": "testtryrycom",
+                  	"accountRut": "Bob Smith",
+                  	"accountNumber": 27,
+                  	"bankName": "BCI"
+                  })
+                  
 https://carlosazaustre.es/blog/como-crear-una-api-rest-usando-node-js/

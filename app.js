@@ -1,9 +1,8 @@
-var express = require("express"),
-    app = express(),
-    bodyParser  = require("body-parser"),
-    methodOverride = require("method-override");
-    mongoose = require('mongoose');
-
+var express         = require("express"),
+    app             = express(),
+    bodyParser      = require("body-parser"),
+    methodOverride  = require("method-override"),
+    mongoose        = require('mongoose');
 
 // Connection to DB
 mongoose.connect('mongodb://localhost/personas', function(err, res) {
@@ -15,7 +14,6 @@ mongoose.connect('mongodb://localhost/personas', function(err, res) {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
-
 
 // Import Models and controllers
 var models     = require('./models/persona')(app, mongoose);
@@ -32,13 +30,13 @@ app.use(router);
 var personas = express.Router();
 
 personas.route('/personas')
-    .get(PersonaCtrl.findAllPersonas);
-    /*.post(TVShowCtrl.addTVShow);*/
+    .get(PersonaCtrl.findAllPersonas)
+    .post(PersonaCtrl.addPersona);
 
 personas.route('/personas/:id')
-    .get(PersonaCtrl.findById);
-/*    .put(TVShowCtrl.updateTVShow)
-    .delete(TVShowCtrl.deleteTVShow);*/
+    .get(PersonaCtrl.findById)
+    .put(PersonaCtrl.updatePersona)
+    .delete(PersonaCtrl.deletePersona);
 
 app.use('/api', personas);
 
@@ -46,25 +44,3 @@ app.use('/api', personas);
 app.listen(3000, function() {
     console.log("Node server running on http://localhost:3000");
 });
-
-/*
-/!*var router = express.Router();*!/
-var PersonaCtrl = require('controllers/personas');
-// API routes
-var personas = express.Router();
-
-router.get('/', function(req, res) {
-    res.send("Hello World!");
-});
-
-app.use(router);
-
-mongoose.connect('mongodb://localhost/personas', function(err, res) {
-    if(err) {
-        console.log('ERROR: connecting to Database. ' + err);
-    }
-    console.log(res);
-    app.listen(3000, function() {
-        console.log("Node server running on http://localhost:3000");
-    });
-});*/
