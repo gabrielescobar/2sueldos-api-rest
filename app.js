@@ -18,6 +18,7 @@ app.use(methodOverride());
 // Import Models and controllers
 var models     = require('./models/persona')(app, mongoose);
 var PersonaCtrl = require('./controllers/personas');
+var EmailCtrl = require('./controllers/emails');
 
 // Example Route
 var router = express.Router();
@@ -28,6 +29,10 @@ app.use(router);
 
 // API routes
 var personas = express.Router();
+var email = express.Router();
+
+personas.route('/email')
+    .post(EmailCtrl.sendEmail);
 
 personas.route('/personas')
     .get(PersonaCtrl.findAllPersonas)

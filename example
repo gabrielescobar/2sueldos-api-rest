@@ -10,5 +10,5 @@ db.persona.insert({
                   	"accountNumber": 27,
                   	"bankName": "BCI"
                   })
-                  
+
 https://carlosazaustre.es/blog/como-crear-una-api-rest-usando-node-js/

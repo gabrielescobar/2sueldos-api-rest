@@ -2,9 +2,10 @@
   "name": "2sueldos-api-rest",
   "version": "0.0.1",
   "dependencies": {
-    "mongoose": "~3.6.11",
+    "body-parser": "^1.5.1",
     "express": "^4.7.1",
     "method-override": "^2.1.2",
-    "body-parser": "^1.5.1"
+    "mongoose": "~3.6.11",
+    "nodemailer": "0.7.1"
   }
 }
