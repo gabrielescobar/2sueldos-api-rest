@@ -13,6 +13,12 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
     }
 });
 
+exports.passwordRecover = function(req, res) {}
+
+exports.referredNewUser = function(req, res) {}
+
+exports.referredRegisterUser = function(req, res) {}
+
 //POST - Insert a new Persona in the DB
 exports.sendEmail = function(req, res) {
     console.log('POST');
