@@ -39,9 +39,9 @@ personas.route('/personas')
     .post(PersonaCtrl.addPersona);
 
 personas.route('/personas/:id')
-   /* .get(PersonaCtrl.findById)*/
     .put(PersonaCtrl.updatePersona)
     .delete(PersonaCtrl.deletePersona);
+/* .get(PersonaCtrl.findById)*/
 
 personas.route('/personas/rut/:rut')
     .get(PersonaCtrl.findByRUT);

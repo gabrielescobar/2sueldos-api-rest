@@ -30,10 +30,26 @@ exports.findByRUT = function(req, res) {
     });
 };
 
+
 //POST - Insert a new Persona in the DB
+// example
+/*{
+    "fullName": "Gabriel Escobar",
+    "rut": "25406310-7",
+    "telephone": 12345678,
+    "address": "Santa Lucia 123",
+    "email": "gabo9690@gmail.com",
+    "password": "123",
+    "accountOwner": "Gabriel Escobar",
+    "accountRut": "25406310-7",
+    "accountNumber": 1234567891011121314,
+    "bankName": "BCI",
+    "referredBy": "18406123-k"
+
+}*/
 exports.addPersona = function(req, res) {
-    console.log('POST');
-    console.log(req.body);
+   /* console.log('POST');
+    console.log(req.body);*/
 
     var persona = new Persona({
         fullName:    req.body.fullName,
