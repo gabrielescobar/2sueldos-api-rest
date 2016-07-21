@@ -48,9 +48,9 @@ exports.findByRUT = function(req, res) {
 
 }*/
 exports.addPersona = function(req, res) {
-   /* console.log('POST');
-    console.log(req.body);*/
-
+    console.log('POST');
+    console.log(req.body);
+    console.log(req.body.fullName);
     var persona = new Persona({
         fullName:    req.body.fullName,
         rut: 	  req.body.rut,
