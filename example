@@ -8,7 +8,8 @@ db.persona.insert({
                   	"accountOwner": "testtryrycom",
                   	"accountRut": "Bob Smith",
                   	"accountNumber": 27,
-                  	"bankName": "BCI"
+                  	"bankName": "BCI",
+                  	"referredBy": ""
                   })
 
 https://carlosazaustre.es/blog/como-crear-una-api-rest-usando-node-js/

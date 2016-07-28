@@ -4,8 +4,93 @@
 //File: controllers/personas.js
 var mongoose = require('mongoose');
 var Persona  = mongoose.model('Persona');
+var EmailCtrl = require('./emails.js');
+//POST - Método para el registro de usuario
+// Ejemplo de json
+/*{
+ "fullName": "Gabriel Escobar",
+ "rut": "25406310-7",
+ "telephone": 12345678,
+ "address": "Santa Lucia 123",
+ "email": "gabo9690@gmail.com",
+ "password": "123",
+ "accountOwner": "Gabriel Escobar",
+ "accountRut": "25406310-7",
+ "accountNumber": 1234567891011121314,
+ "bankName": "BCI",
+ "referredBy": "18406123-k"
+ }*/
+exports.userRegister = function(req, res) {
+    Persona.count({ $or: [ { rut: req.body.rut }, { email: req.body.email } ] }, function (err, count) {
 
-//GET - Return all personas in the DB
+        if (count > 0){
+            res.status(429).send({"statusCode": 429, message: "El rut o correo ingresados ya estan registrados"});
+        }
+        else{
+            var persona = new Persona({
+                fullName:    req.body.fullName,
+                rut: 	  req.body.rut,
+                telephone:  req.body.telephone,
+                address:   req.body.address,
+                email:  req.body.email,
+                password:    req.body.password,
+                accountOwner:  req.body.accountOwner,
+                accountRut:  req.body.accountRut,
+                accountNumber:   req.body.accountNumber,
+                bankName:  req.body.bankName,
+                referredBy: ""
+            });
+
+            persona.save(function(err, persona) {
+                if(err)
+                    return  res.status(500).send({"statusCode": 500, message: err.message});
+                /*EmailCtrl.sendEmail();*/
+                res.status(200).send({"statusCode": 200, message: "el usuario fue creado exitosamente"});
+            });
+        }
+    });
+};
+//POST - Método para el login de un usuario al sistema
+// Ejemplo de json
+/*{
+ "email": "San Francisco",
+ "password": "Male"
+ }*/
+exports.userLogin = function(req, res) {
+    Persona.find({$and: [{email: req.body.email}, {password: req.body.password}]}, { _id: 0, password: 0, __v: 0 }, function(err, persona) {
+        if (persona.length == 0)
+            res.status(429).send({"statusCode": 429, message: "El rut o correo ingresados ya estan registrados"});
+        else {
+            if (err)
+                return res.status(500).send({"statusCode": 500, message: err.message});
+
+            EmailCtrl.recoverPassword();
+            res.status(200).send({"statusCode": 200, usuario: persona[0]});
+            
+        }
+    });
+
+};
+//GET - Método para recuperar el password de un usuario
+// Ejemplo de llamada url
+/*
+* http://localhost:3000/api/passwordRecover/gabo9690@gmail.com
+* */
+/*exports.userLogin = function(req, res) {
+    Persona.find({$and: [{email: req.body.email}, {password: req.body.password}]}, { _id: 0, password: 0, __v: 0 }, function(err, persona) {
+        /!*if(err) return res.send(500, err.message);
+         res.status(200).jsonp(persona);*!/
+        if (persona.length == 0)
+            res.status(429).send({"statusCode": 429, message: "El rut o correo ingresados ya estan registrados"});
+        else
+        if(err)
+            return  res.status(500).send({"statusCode": 500, message: err.message});
+        res.status(200).send({"statusCode": 200, usuario: persona[0]});
+    });
+};*/
+
+
+
 exports.findAllPersonas = function(req, res) {
     Persona.find(function(err, personas) {
         if(err) res.send(500, err.message);
@@ -17,11 +102,11 @@ exports.findAllPersonas = function(req, res) {
 
 //GET - Return a Persona with specified ID
 /*exports.findById = function(req, res) {
-    Persona.findById(req.params.id, function(err, persona) {
-        if(err) return res.send(500, err.message);
-        res.status(200).jsonp(persona);
-    });
-};*/
+ Persona.findById(req.params.id, function(err, persona) {
+ if(err) return res.send(500, err.message);
+ res.status(200).jsonp(persona);
+ });
+ };*/
 
 exports.findByRUT = function(req, res) {
     Persona.find({rut: req.params.rut}, function(err, persona) {
@@ -31,45 +116,7 @@ exports.findByRUT = function(req, res) {
 };
 
 
-//POST - Insert a new Persona in the DB
-// example
-/*{
-    "fullName": "Gabriel Escobar",
-    "rut": "25406310-7",
-    "telephone": 12345678,
-    "address": "Santa Lucia 123",
-    "email": "gabo9690@gmail.com",
-    "password": "123",
-    "accountOwner": "Gabriel Escobar",
-    "accountRut": "25406310-7",
-    "accountNumber": 1234567891011121314,
-    "bankName": "BCI",
-    "referredBy": "18406123-k"
 
-}*/
-exports.addPersona = function(req, res) {
-    console.log('POST');
-    console.log(req.body);
-    console.log(req.body.fullName);
-    var persona = new Persona({
-        fullName:    req.body.fullName,
-        rut: 	  req.body.rut,
-        telephone:  req.body.telephone,
-        address:   req.body.address,
-        email:  req.body.email,
-        password:    req.body.password,
-        accountOwner:  req.body.accountOwner,
-        accountRut:  req.body.accountRut,
-        accountNumber:   req.body.accountNumber,
-        bankName:  req.body.bankName
-    });
-
-    persona.save(function(err, persona) {
-        if(err)
-            return  res.status(500).send(err.message);
-        res.status(200).jsonp(persona);
-    });
-};
 
 //PUT - Update a register already exists
 exports.updatePersona = function(req, res) {
