@@ -4,7 +4,7 @@
 
 var nodemailer = require("nodemailer");
 
-// create reusable transport method (opens pool of SMTP connections)
+// Método de transporte reusable (abre el pool de conexiones SMTP)
 var smtpTransport = nodemailer.createTransport("SMTP",{
     service: "Gmail",
     auth: {
@@ -13,18 +13,15 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
     }
 });
 
-// generate ramdon password Math.random().toString(36).substr(2, 8)
-//POST - Insert a new Persona in the DB
-exports.recoverPassword = function() {
- /*   console.log('POST');
-    console.log(req.body);*/
 
-    // setup e-mail data with unicode symbols
+//Método para el envio de correo de recuperación de contraseña
+exports.recoverPassword = function(persona,password) {
+
+    // Opciones de envio de correo
     var mailOptions = {
         from: "Info 2Sueldos ✔ <2sueldosinfo@gmail.com>", // sender address
-        to: "gabo9690@gmail.com", // list of receivers separated with ,
+        to: persona.email, // list of receivers separated with ,
         subject: "Cambio de contraseña", // Subject line
-/*        text: req.body.text, // plaintext body*/
         html: '<style type="text/css">'+
     'body,'+
        ' html,'+
@@ -55,12 +52,12 @@ exports.recoverPassword = function() {
 
        '<spacer size="16"></spacer>'+
 
-       '<h1 class="text-center">Olvidaste tu Contraseña?</h1>'+
+       '<h1 class="text-center">Olvidaste tu Contraseña '+ persona.fullName +'?</h1>'+
 
    '<spacer size="16"></spacer>'+
 
        '<p class="text-center">No hay problema se te ha asignado la siguiente contraseña para acceder. Recuerda cambiarla una vez ingreses</p>'+
-   '<span class="large expand">dsf354hdfg</span>'+
+   '<span class="large expand">'+ password +'</span>'+
 
    '<hr/>'+
     '</columns>'+
@@ -70,7 +67,7 @@ exports.recoverPassword = function() {
        '</container>'
     }
 
-    // send mail with defined transport object
+    // envia el correo con el objeto de transporte definido
     smtpTransport.sendMail(mailOptions, function(error, response){
       if(error){
             return  error;
@@ -78,9 +75,63 @@ exports.recoverPassword = function() {
           return  response.message;
 
         }
+        smtpTransport.close(); // Desconecta el pool de conexiones
+    });
+};
 
-        // if you don't want to use this transport object anymore, uncomment following line
-        smtpTransport.close(); // shut down the connection pool, no more messages
+//Método para el envio de correo de bienvenida del usuario
+exports.welcomeEmail = function(persona) {
+
+    // Opciones de envio de correo
+    var mailOptions = {
+        from: "Info 2Sueldos ✔ <2sueldosinfo@gmail.com>", // sender address
+        to: persona.email, // list of receivers separated with ,
+        subject: "Bienvenido!!", // Subject line
+        html: '<style type="text/css">'+
+        'body,'+
+        'html,'+
+        '.body {'+
+        'background: #f3f3f3 !important;'+
+    '}'+
+    '.container .header {'+
+        'background: #f3f3f3;'+
+    '}'+
+    '.body-border {'+
+        'border-top: 8px solid #663399;'+
+    '}'+
+    '</style>'+
+    '<container class="header">'+
+        '<row>'+
+        '<columns>'+
+        '<h1 class="text-center">Bienvenido '+persona.fullName+' a 2Sueldos</h1>'+
+    '</columns>'+
+    '</row>'+
+    '</container>'+
+    '<container class="body-border">'+
+        '<row>'+
+        '<columns>'+
+        '<spacer size="32"></spacer>'+
+        '<center>'+
+        '<img src="http://2sueldos.com/assets/pages/media/gallery/logo_interna.png">'+
+        '</center>'+
+        '<spacer size="16"></spacer>'+
+        '<h4>Tu usuario ha sido automaticamente creado tambien en la plataforma de cotizacion de bciSeguros.</h4>'+
+    '<p>Comienza ya a referir y cotizar seguros!! no esperemas más por ese sueldo extra!.</p>'+
+    '</columns>'+
+    '</row>'+
+    '<spacer size="16"></spacer>'+
+        '</container>'
+    }
+
+    // envia el correo con el objeto de transporte definido
+    smtpTransport.sendMail(mailOptions, function(error, response){
+        if(error){
+            return  error;
+        }else{
+            return  response.message;
+
+        }
+        smtpTransport.close(); // Desconecta el pool de conexiones
     });
 };
 

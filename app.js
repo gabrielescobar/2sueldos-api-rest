@@ -33,14 +33,21 @@ var personas = express.Router();
 
 
 
-personas.route('/personas')
-    .get(PersonaCtrl.findAllPersonas);
-
 personas.route('/register')
     .post(PersonaCtrl.userRegister);
 
 personas.route('/login')
     .post(PersonaCtrl.userLogin);
+
+personas.route('/recover/:email')
+    .get(PersonaCtrl.passwordRecover);
+
+
+
+
+
+personas.route('/personas')
+    .get(PersonaCtrl.findAllPersonas);
 
 personas.route('/personas/:id')
     .put(PersonaCtrl.updatePersona)

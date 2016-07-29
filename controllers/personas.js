@@ -5,6 +5,8 @@
 var mongoose = require('mongoose');
 var Persona  = mongoose.model('Persona');
 var EmailCtrl = require('./emails.js');
+
+
 //POST - Método para el registro de usuario
 // Ejemplo de json
 /*{
@@ -44,12 +46,15 @@ exports.userRegister = function(req, res) {
             persona.save(function(err, persona) {
                 if(err)
                     return  res.status(500).send({"statusCode": 500, message: err.message});
-                /*EmailCtrl.sendEmail();*/
+                EmailCtrl.welcomeEmail(persona);
                 res.status(200).send({"statusCode": 200, message: "el usuario fue creado exitosamente"});
+
             });
         }
     });
 };
+
+
 //POST - Método para el login de un usuario al sistema
 // Ejemplo de json
 /*{
@@ -63,31 +68,36 @@ exports.userLogin = function(req, res) {
         else {
             if (err)
                 return res.status(500).send({"statusCode": 500, message: err.message});
-
-            EmailCtrl.recoverPassword();
             res.status(200).send({"statusCode": 200, usuario: persona[0]});
             
         }
     });
 
 };
+
+
 //GET - Método para recuperar el password de un usuario
 // Ejemplo de llamada url
 /*
 * http://localhost:3000/api/passwordRecover/gabo9690@gmail.com
 * */
-/*exports.userLogin = function(req, res) {
-    Persona.find({$and: [{email: req.body.email}, {password: req.body.password}]}, { _id: 0, password: 0, __v: 0 }, function(err, persona) {
-        /!*if(err) return res.send(500, err.message);
-         res.status(200).jsonp(persona);*!/
+exports.passwordRecover = function(req, res) {
+    Persona.find({email: req.params.email}, function(err, persona) {
         if (persona.length == 0)
-            res.status(429).send({"statusCode": 429, message: "El rut o correo ingresados ya estan registrados"});
-        else
-        if(err)
-            return  res.status(500).send({"statusCode": 500, message: err.message});
-        res.status(200).send({"statusCode": 200, usuario: persona[0]});
+            res.status(429).send({"statusCode": 429, message: "El email ingresado no esta registrado en el sistema."});
+        else {
+            var newPassword = Math.random().toString(36).substr(2, 8);
+            Persona.update({email: req.params.email}, { $set: { password: newPassword}}, false, true);
+            EmailCtrl.recoverPassword(persona[0],newPassword);
+            res.status(200).send({"statusCode": 200, message: "Tu nueva contraseña ha sido enviada a tu email."});
+        }
+
     });
-};*/
+};
+
+
+
+
 
 
 
