@@ -24,30 +24,33 @@ var EmailCtrl = require('./emails.js');
  }*/
 exports.userRegister = function(req, res) {
     Persona.count({ $or: [ { rut: req.body.rut }, { email: req.body.email } ] }, function (err, count) {
-
         if (count > 0){
             res.status(429).send({"statusCode": 429, message: "El rut o correo ingresados ya estan registrados"});
         }
         else{
             var persona = new Persona({
-                fullName:    req.body.fullName,
-                rut: 	  req.body.rut,
+                fullName:  req.body.fullName,
+                rut:  req.body.rut,
                 telephone:  req.body.telephone,
-                address:   req.body.address,
+                address:  req.body.address,
                 email:  req.body.email,
-                password:    req.body.password,
+                password:  req.body.password,
                 accountOwner:  req.body.accountOwner,
                 accountRut:  req.body.accountRut,
-                accountNumber:   req.body.accountNumber,
+                accountNumber:  req.body.accountNumber,
                 bankName:  req.body.bankName,
-                referredBy: ""
+                referredBy:  "",
+                typeUser:  req.body.typeUser
             });
 
             persona.save(function(err, persona) {
                 if(err)
                     return  res.status(500).send({"statusCode": 500, message: err.message});
                 EmailCtrl.welcomeEmail(persona);
-                res.status(200).send({"statusCode": 200, message: "el usuario fue creado exitosamente"});
+                persona._id = "";
+                persona.password = "";
+                persona.__v = "";
+                res.status(200).send({"statusCode": 200, usuario: persona});
 
             });
         }
