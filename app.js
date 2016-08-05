@@ -1,5 +1,4 @@
 var express         = require("express"),
-    cors = require('cors'),
     app             = express(),
     bodyParser      = require("body-parser"),
     methodOverride  = require("method-override"),
@@ -11,9 +10,7 @@ mongoose.connect('mongodb://localhost/personas', function(err, res) {
     console.log('Connected to Database');
 });
 
-var corsOptions = {
-    origin: 'http://localhost'
-};
+
 
 // Middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -35,7 +32,7 @@ app.use(router);
 // API routes
 var personas = express.Router();
 
-personas.route('/register', cors(corsOptions))
+personas.route('/register')
     .post(PersonaCtrl.userRegister);
 
 personas.route('/login')
