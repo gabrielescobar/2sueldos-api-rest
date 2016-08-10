@@ -25,7 +25,7 @@ var EmailCtrl = require('./emails.js');
 exports.userRegister = function(req, res) {
     Persona.count({ $or: [ { rut: req.body.rut }, { email: req.body.email } ] }, function (err, count) {
         if (count > 0){
-            res.status(429).send({"statusCode": 429, message: "El rut o correo ingresados ya estan registrados"});
+            res.status(269).send({"statusCode": 269, message: "El rut o correo ingresados ya estan registrados"});
         }
         else{
             var persona = new Persona({
@@ -67,7 +67,7 @@ exports.userRegister = function(req, res) {
 exports.userLogin = function(req, res) {
     Persona.find({$and: [{email: req.body.email}, {password: req.body.password}]}, { _id: 0, password: 0, __v: 0 }, function(err, persona) {
         if (persona.length == 0)
-            res.status(429).send({"statusCode": 429, message: "El rut o correo ingresados ya estan registrados"});
+            res.status(269).send({"statusCode": 269, message: "El correo ó contraseña ingresados son incorrectos"});
         else {
             if (err)
                 return res.status(500).send({"statusCode": 500, message: err.message});
@@ -87,7 +87,7 @@ exports.userLogin = function(req, res) {
 exports.passwordRecover = function(req, res) {
     Persona.find({email: req.params.email}, function(err, persona) {
         if (persona.length == 0)
-            res.status(429).send({"statusCode": 429, message: "El email ingresado no esta registrado en el sistema."});
+            res.status(269).send({"statusCode": 269, message: "El email ingresado no esta registrado en el sistema."});
         else {
             var newPassword = Math.random().toString(36).substr(2, 8);
             Persona.update({email: req.params.email}, { $set: { password: newPassword}}, false, true);
@@ -97,6 +97,10 @@ exports.passwordRecover = function(req, res) {
 
     });
 };
+
+
+
+
 
 
 
