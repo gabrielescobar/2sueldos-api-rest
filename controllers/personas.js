@@ -108,6 +108,21 @@ exports.passwordRecover = function(req, res) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 exports.findAllPersonas = function(req, res) {
     Persona.find(function(err, personas) {
         if(err) res.send(500, err.message);

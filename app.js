@@ -20,6 +20,7 @@ app.use(methodOverride());
 // Import Models and controllers
 var models     = require('./models/persona')(app, mongoose);
 var PersonaCtrl = require('./controllers/personas');
+var ReferidosCtrl = require('./controllers/referidos');
 
 
 // Example Route
@@ -30,33 +31,33 @@ router.get('/', function(req, res) {
 app.use(router);
 
 // API routes
-var personas = express.Router();
-
-personas.route('/register')
-    .post(PersonaCtrl.userRegister);
-
-personas.route('/login')
-    .post(PersonaCtrl.userLogin);
-
-personas.route('/recover/:email')
-    .get(PersonaCtrl.passwordRecover);
+var dosSueldos = express.Router();
 
 
+dosSueldos.route('/register').post(PersonaCtrl.userRegister);
+
+dosSueldos.route('/login').post(PersonaCtrl.userLogin);
+
+dosSueldos.route('/recover/:email').get(PersonaCtrl.passwordRecover);
+
+dosSueldos.route('/refer').post(ReferidosCtrl.referAUser);
 
 
 
-personas.route('/personas')
+
+
+dosSueldos.route('/personas')
     .get(PersonaCtrl.findAllPersonas);
 
-personas.route('/personas/:id')
+dosSueldos.route('/personas/:id')
     .put(PersonaCtrl.updatePersona)
     .delete(PersonaCtrl.deletePersona);
 /* .get(PersonaCtrl.findById)*/
 
-personas.route('/personas/rut/:rut')
+dosSueldos.route('/personas/rut/:rut')
     .get(PersonaCtrl.findByRUT);
 
-app.use('/api', personas);
+app.use('/api', dosSueldos);
 
 // Start server
 app.listen(3000, function() {

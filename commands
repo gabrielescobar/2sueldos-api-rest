@@ -1,0 +1,3 @@
+
+
+Persona.update({}, { $set: { referredBy: ""}}, false, true);

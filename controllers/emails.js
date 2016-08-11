@@ -135,4 +135,114 @@ exports.welcomeEmail = function(persona) {
     });
 };
 
+//Método para el envio de correo a un usuario referido registrado
+exports.referRegisterEmail = function(persona) {
 
+    // Opciones de envio de correo
+    var mailOptions = {
+        from: "Info 2Sueldos ✔ <2sueldosinfo@gmail.com>", // sender address
+        to: persona.email, // list of receivers separated with ,
+        subject: "Bienvenido!!", // Subject line
+        html: '<style type="text/css">'+
+        'body,'+
+        'html,'+
+        '.body {'+
+        'background: #f3f3f3 !important;'+
+        '}'+
+        '.container .header {'+
+        'background: #f3f3f3;'+
+        '}'+
+        '.body-border {'+
+        'border-top: 8px solid #663399;'+
+        '}'+
+        '</style>'+
+        '<container class="header">'+
+        '<row>'+
+        '<columns>'+
+        '<h1 class="text-center">Bienvenido '+persona.fullName+' a 2Sueldos</h1>'+
+        '</columns>'+
+        '</row>'+
+        '</container>'+
+        '<container class="body-border">'+
+        '<row>'+
+        '<columns>'+
+        '<spacer size="32"></spacer>'+
+        '<center>'+
+        '<img src="http://2sueldos.com/assets/pages/media/gallery/logo_interna.png">'+
+        '</center>'+
+        '<spacer size="16"></spacer>'+
+        '<h4>Tu usuario ha sido automaticamente creado tambien en la plataforma de cotizacion de bciSeguros.</h4>'+
+        '<p>Comienza ya a referir y cotizar seguros!! no esperemas más por ese sueldo extra!.</p>'+
+        '</columns>'+
+        '</row>'+
+        '<spacer size="16"></spacer>'+
+        '</container>'
+    }
+
+    // envia el correo con el objeto de transporte definido
+    smtpTransport.sendMail(mailOptions, function(error, response){
+        if(error){
+            return  error;
+        }else{
+            return  response.message;
+
+        }
+        smtpTransport.close(); // Desconecta el pool de conexiones
+    });
+};
+
+//Método para el envio de correo a un usuario referido NO registrado
+exports.referNoRegisterEmail = function(persona) {
+
+    // Opciones de envio de correo
+    var mailOptions = {
+        from: "Info 2Sueldos ✔ <2sueldosinfo@gmail.com>", // sender address
+        to: persona.email, // list of receivers separated with ,
+        subject: "Bienvenido!!", // Subject line
+        html: '<style type="text/css">'+
+        'body,'+
+        'html,'+
+        '.body {'+
+        'background: #f3f3f3 !important;'+
+        '}'+
+        '.container .header {'+
+        'background: #f3f3f3;'+
+        '}'+
+        '.body-border {'+
+        'border-top: 8px solid #663399;'+
+        '}'+
+        '</style>'+
+        '<container class="header">'+
+        '<row>'+
+        '<columns>'+
+        '<h1 class="text-center">Bienvenido '+persona.fullName+' a 2Sueldos</h1>'+
+        '</columns>'+
+        '</row>'+
+        '</container>'+
+        '<container class="body-border">'+
+        '<row>'+
+        '<columns>'+
+        '<spacer size="32"></spacer>'+
+        '<center>'+
+        '<img src="http://2sueldos.com/assets/pages/media/gallery/logo_interna.png">'+
+        '</center>'+
+        '<spacer size="16"></spacer>'+
+        '<h4>Tu usuario ha sido automaticamente creado tambien en la plataforma de cotizacion de bciSeguros.</h4>'+
+        '<p>Comienza ya a referir y cotizar seguros!! no esperemas más por ese sueldo extra!.</p>'+
+        '</columns>'+
+        '</row>'+
+        '<spacer size="16"></spacer>'+
+        '</container>'
+    }
+
+    // envia el correo con el objeto de transporte definido
+    smtpTransport.sendMail(mailOptions, function(error, response){
+        if(error){
+            return  error;
+        }else{
+            return  response.message;
+
+        }
+        smtpTransport.close(); // Desconecta el pool de conexiones
+    });
+};
