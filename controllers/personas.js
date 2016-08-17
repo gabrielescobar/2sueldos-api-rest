@@ -23,7 +23,9 @@ var EmailCtrl = require('./emails.js');
  "referredBy": "18406123-k"
  }*/
 exports.userRegister = function(req, res) {
-    Persona.count({ $or: [ { rut: req.body.rut }, { email: req.body.email } ] }, function (err, count) {
+    Persona.count({ $or: [ { rut: req.body.rut }
+     /*   , { email: req.body.email } */
+    ]}, function (err, count) {
         if (count > 0){
             res.status(269).send({"statusCode": 269, message: "El rut o correo ingresados ya estan registrados"});
         }
@@ -103,26 +105,6 @@ exports.passwordRecover = function(req, res) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 exports.findAllPersonas = function(req, res) {
     Persona.find(function(err, personas) {
         if(err) res.send(500, err.message);
@@ -172,10 +154,12 @@ exports.updatePersona = function(req, res) {
 
 //DELETE - Delete a Persona with specified ID
 exports.deletePersona = function(req, res) {
-    Persona.findById(req.params.id, function(err, persona) {
+    Persona.remove({});
+    res.status(200);
+   /* Persona.findById(req.params.id, function(err, persona) {
         persona.remove(function(err) {
             if(err) return res.send(500, err.message);
             res.status(200);
         })
-    });
+    });*/
 };

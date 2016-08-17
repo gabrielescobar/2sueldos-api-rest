@@ -37,13 +37,23 @@ exports.referAUser = function(req, res) {
  "rut": "25406319-3"
  }*/
 exports.referUnregisteredUser = function(req, res) {
-    Persona.find({$or: [{email: req.body.email}]}, function(err, persona) {
+    Persona.find({email: req.params.email}, function(err, persona) {
         if (err)
             return res.status(500).send({"statusCode": 500, message: err.message});
         if (persona.length != 0)
             res.status(269).send({"statusCode": 269, message: "El correo ingresado esta registrado en el sistema"});
         else {
-            res.status(200).send({"statusCode": 200, message: "Se ha enviado un correo a " + req.body.email + ", una vez se registre en el sistema sera tu referido automaticamente."});
+            res.status(200).send({"statusCode": 200, message: "Se ha enviado un correo a " + req.params.email + ", una vez se registre en el sistema sera tu referido automaticamente."});
         }
     });
+};
+
+
+exports.addReferens = function(req, res) {
+};
+exports.deleteRefered = function(req, res) {
+};
+exports.findMyRefers = function(req, res) {
+};
+exports.findwhoReferedMe = function(req, res) {
 };

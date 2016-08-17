@@ -1,3 +1,74 @@
 
 
 Persona.update({}, { $set: { referredBy: ""}}, false, true);
+
+{
+    "fullName": "Alberto Pena",
+    "rut": "11.723.156-9",
+    "telephone": 1123213,
+    "address": "san francisco",
+    "email": "test@gmail.com",
+    "password": "123",
+    "accountOwner": "Alberto Peña",
+    "accountRut": "11.723.156-9",
+    "accountNumber": 213213123123,
+    "bankName": "BICE",
+    "referredBy": "",
+    "typeUser": "premium"
+}
+{
+    "fullName": "Alejandro Martinez",
+    "rut": "25.406.319-3",
+    "telephone": 1123213,
+    "address": "san francisco",
+    "email": "gabo9690@gmail.com",
+    "password": "123",
+    "accountOwner": "Alberto Peña",
+    "accountRut": "11.723.156-9",
+    "accountNumber": 213213123123,
+    "bankName": "BICE",
+    "referredBy": "",
+    "typeUser": "primary"
+}
+{
+    "fullName": "Alan Brito Delgado",
+    "rut": "11.457.379-5",
+    "telephone": 1123213,
+    "address": "san francisco",
+    "email": "gabriel.escobar@airmatek.com",
+    "password": "123",
+    "accountOwner": "Alberto Peña",
+    "accountRut": "11.723.156-9",
+    "accountNumber": 213213123123,
+    "bankName": "BICE",
+    "referredBy": "",
+    "typeUser": "primary"
+}
+{
+    "fullName": "Gabriel Escobar",
+    "rut": "18.311.121-3",
+    "telephone": 1123213,
+    "address": "san francisco",
+    "email": "gabo_9690@hotmail.com",
+    "password": "123",
+    "accountOwner": "Alberto Peña",
+    "accountRut": "11.723.156-9",
+    "accountNumber": 213213123123,
+    "bankName": "BICE",
+    "referredBy": "",
+    "typeUser": "secundary"
+}
+{
+    "fullName": "Ricardo Mendez",
+    "rut": "21.015.604-6",
+    "telephone": 1123213,
+    "address": "san francisco",
+    "email": "gabo_9690@hotmail.com",
+    "password": "123",
+    "accountOwner": "Alberto Peña",
+    "accountRut": "11.723.156-9",
+    "accountNumber": 213213123123,
+    "bankName": "BICE",
+    "referredBy": "",
+    "typeUser": "secundary"
+}

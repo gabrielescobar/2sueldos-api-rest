@@ -19,7 +19,10 @@ exports = module.exports = function(app, mongoose) {
                 'BTM', 'BSEC', 'BF', 'BR', 'BCON', 'BP', 'BBVA', 'COOP']
         },
         referredBy: 		{ type: String },
-        typeUser: 	{ type: String }
+        typeUser: 	{
+            type: String,
+            enum: ['primary', 'secundary', 'premium']
+        }
     });
 
     mongoose.model('Persona', personaSchema);
