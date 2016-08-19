@@ -41,13 +41,17 @@ dosSueldos.route('/login').post(PersonaCtrl.userLogin);
 dosSueldos.route('/recover/:email').get(PersonaCtrl.passwordRecover);
 
 dosSueldos.route('/refer').post(ReferidosCtrl.referAUser);
-dosSueldos.route('/refer/:email').get(ReferidosCtrl.referUnregisteredUser);
+dosSueldos.route('/refer/:email/RutParent/:rut').get(ReferidosCtrl.referUnregisteredUser);
 
+dosSueldos.route('/reference').post(ReferidosCtrl.addReference);
 
+dosSueldos.route('/deleteRefered/:rut').get(ReferidosCtrl.deleteRefered);
 
-
-
+dosSueldos.route('/personas/rut/:rut').get(PersonaCtrl.findByRUT);
+dosSueldos.route('/personas/refers/:rut').get(ReferidosCtrl.findAllMyRefereds);
 dosSueldos.route('/personas').get(PersonaCtrl.findAllPersonas);
+
+
 
 
 dosSueldos.route('/personas/:id')

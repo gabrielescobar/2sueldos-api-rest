@@ -96,10 +96,23 @@ exports.passwordRecover = function(req, res) {
             EmailCtrl.recoverPassword(persona[0],newPassword);
             res.status(200).send({"statusCode": 200, message: "Tu nueva contraseña ha sido enviada a tu email."});
         }
-
     });
 };
 
+
+
+//GET - Método para consultar un usuario por su rut
+// Ejemplo de llamada url
+/*
+ * http://localhost:3000/api/personas/rut/11.723.156-9
+ * */
+exports.findByRUT = function(req, res) {
+    Persona.find({rut: req.params.rut}, { fullName: 1, rut: 1, email: 1, _id:0 },function(err, persona) {
+        if(err)
+            return res.send(500, err.message);
+        res.status(200).send({"statusCode": 200, usuario: persona[0]});
+    });
+};
 
 
 
@@ -122,12 +135,12 @@ exports.findAllPersonas = function(req, res) {
  });
  };*/
 
-exports.findByRUT = function(req, res) {
+/*exports.findByRUT = function(req, res) {
     Persona.find({rut: req.params.rut}, function(err, persona) {
         if(err) return res.send(500, err.message);
         res.status(200).jsonp(persona);
     });
-};
+};*/
 
 
 
