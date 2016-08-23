@@ -41,7 +41,7 @@ dosSueldos.route('/login').post(PersonaCtrl.userLogin);
 dosSueldos.route('/recover/:email').get(PersonaCtrl.passwordRecover);
 
 dosSueldos.route('/refer').post(ReferidosCtrl.referAUser);
-dosSueldos.route('/refer/:email/RutParent/:rut').get(ReferidosCtrl.referUnregisteredUser);
+dosSueldos.route('/refer/:email/:rut/:name').get(ReferidosCtrl.referUnregisteredUser);
 
 dosSueldos.route('/reference').post(ReferidosCtrl.addReference);
 
