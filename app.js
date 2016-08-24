@@ -45,7 +45,7 @@ dosSueldos.route('/refer/:email/:rut/:name').get(ReferidosCtrl.referUnregistered
 
 dosSueldos.route('/reference').post(ReferidosCtrl.addReference);
 
-dosSueldos.route('/deleteRefered/:rut').get(ReferidosCtrl.deleteRefered);
+dosSueldos.route('/deleteRefered/:rut/:name').get(ReferidosCtrl.deleteRefered);
 
 dosSueldos.route('/personas/rut/:rut').get(PersonaCtrl.findByRUT);
 dosSueldos.route('/personas/refers/:rut').get(ReferidosCtrl.findAllMyRefereds);
