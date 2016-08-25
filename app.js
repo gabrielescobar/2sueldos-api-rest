@@ -21,6 +21,7 @@ app.use(methodOverride());
 var models     = require('./models/persona')(app, mongoose);
 var PersonaCtrl = require('./controllers/personas');
 var ReferidosCtrl = require('./controllers/referidos');
+var VentasDCtrl = require('./controllers/ventas');
 
 
 // Example Route
@@ -50,6 +51,12 @@ dosSueldos.route('/deleteRefered/:rut/:name').get(ReferidosCtrl.deleteRefered);
 dosSueldos.route('/personas/rut/:rut').get(PersonaCtrl.findByRUT);
 dosSueldos.route('/personas/refers/:rut').get(ReferidosCtrl.findAllMyRefereds);
 dosSueldos.route('/personas').get(PersonaCtrl.findAllPersonas);
+
+
+dosSueldos.route('/delegate').post(VentasDCtrl.delegateSale);
+dosSueldos.route('/delegate/:id').post(ReferidosCtrl.addReference);
+dosSueldos.route('/delegate/changestatus').post(ReferidosCtrl.addReference);
+
 
 
 

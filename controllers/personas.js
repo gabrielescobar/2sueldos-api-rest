@@ -23,13 +23,22 @@ var EmailCtrl = require('./emails.js');
  "referredBy": "18406123-k"
  }*/
 exports.userRegister = function(req, res) {
+
+    var delegate = -1;
+
     Persona.count({ $or: [ { rut: req.body.rut }
-     /*   , { email: req.body.email } */
+        , { email: req.body.email }
     ]}, function (err, count) {
         if (count > 0){
             res.status(269).send({"statusCode": 269, message: "El rut o correo ingresados ya estan registrados"});
         }
         else{
+            console.log(req.body);
+
+            if(req.body.typeUser == "secundary"){
+                delegate = 0;
+            }
+
             var persona = new Persona({
                 fullName:  req.body.fullName,
                 rut:  req.body.rut,
@@ -42,10 +51,12 @@ exports.userRegister = function(req, res) {
                 accountNumber:  req.body.accountNumber,
                 bankName:  req.body.bankName,
                 referredBy:  "",
-                typeUser:  req.body.typeUser
+                typeUser:  req.body.typeUser,
+                delegate: delegate
             });
 
             persona.save(function(err, persona) {
+                console.log(err);
                 if(err)
                     return  res.status(500).send({"statusCode": 500, message: err.message});
                 EmailCtrl.welcomeEmail(persona);

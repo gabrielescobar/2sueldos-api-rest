@@ -22,9 +22,35 @@ exports = module.exports = function(app, mongoose) {
         typeUser: 	{
             type: String,
             enum: ['primary', 'secundary', 'premium']
-        }
+        },
+        delegate: 	{ type: Number }
     });
 
+
+    var delegatedSchema = new mongoose.Schema({
+        dateDelegated: 		{ type: String },
+        rutParent: 		{ type: String },
+        rutSeller: 	{ type: String },
+        status: 		{
+            type: String,
+            enum: ['assigned','progress', 'finished', 'deleted']
+        },
+        clientName:  	{ type: String },
+        clientEmail: 	{ type: String },
+        clientPhone: 		{ type: Number },
+        clientAddress: 	{ type: String }
+    });
+
+    mongoose.model('Delegated', delegatedSchema);
     mongoose.model('Persona', personaSchema);
 
+
 };
+
+/*
+
+exports = module.exports = function(app, mongoose) {
+
+
+
+};*/
