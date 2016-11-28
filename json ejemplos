@@ -1,74 +1,92 @@
 
-
-Persona.update({}, { $set: { referredBy: ""}}, false, true);
-
 {
     "fullName": "Alberto Pena",
-    "rut": "11.723.156-9",
+    "rut": "11723156-9",
     "telephone": 1123213,
     "address": "san francisco",
     "email": "test@gmail.com",
     "password": "123",
     "accountOwner": "Alberto Peña",
-    "accountRut": "11.723.156-9",
+    "accountRut": "11723156-9",
     "accountNumber": 213213123123,
     "bankName": "BICE",
     "referredBy": "",
-    "typeUser": "premium"
+    "typeUser": "premium",
+    "delegate": -1
 }
 {
     "fullName": "Alejandro Martinez",
-    "rut": "25.406.319-3",
+    "rut": "25406319-3",
     "telephone": 1123213,
     "address": "san francisco",
     "email": "gabo9690@gmail.com",
     "password": "123",
     "accountOwner": "Alberto Peña",
-    "accountRut": "11.723.156-9",
+    "accountRut": "11723156-9",
     "accountNumber": 213213123123,
     "bankName": "BICE",
-    "referredBy": "",
-    "typeUser": "primary"
+    "referredBy": "11723156-9",
+    "typeUser": "primary",
+     "delegate": -1
+
 }
 {
     "fullName": "Alan Brito Delgado",
-    "rut": "11.457.379-5",
+    "rut": "11457379-5",
+    "telephone": 1123213,
+    "address": "san francisco",
+    "email": "test@airmatek.com",
+    "password": "123",
+    "accountOwner": "Alberto Peña",
+    "accountRut": "11723156-9",
+    "accountNumber": 213213123123,
+    "bankName": "BICE",
+    "referredBy": "11723156-9",
+    "typeUser": "primary",
+    "delegate": -1
+}
+{
+    "fullName": "Gabriel Escobar",
+    "rut": "18311121-3",
     "telephone": 1123213,
     "address": "san francisco",
     "email": "gabriel.escobar@airmatek.com",
     "password": "123",
     "accountOwner": "Alberto Peña",
-    "accountRut": "11.723.156-9",
+    "accountRut": "11723156-9",
     "accountNumber": 213213123123,
     "bankName": "BICE",
     "referredBy": "",
-    "typeUser": "primary"
-}
-{
-    "fullName": "Gabriel Escobar",
-    "rut": "18.311.121-3",
-    "telephone": 1123213,
-    "address": "san francisco",
-    "email": "gabo_9690@hotmail.com",
-    "password": "123",
-    "accountOwner": "Alberto Peña",
-    "accountRut": "11.723.156-9",
-    "accountNumber": 213213123123,
-    "bankName": "BICE",
-    "referredBy": "",
-    "typeUser": "secundary"
+    "typeUser": "secundary",
+     "delegate": 4
 }
 {
     "fullName": "Ricardo Mendez",
-    "rut": "21.015.604-6",
+    "rut": "21015604-6",
     "telephone": 1123213,
     "address": "san francisco",
     "email": "gabo_9690@hotmail.com",
     "password": "123",
     "accountOwner": "Alberto Peña",
-    "accountRut": "11.723.156-9",
+    "accountRut": "11723156-9",
     "accountNumber": 213213123123,
     "bankName": "BICE",
     "referredBy": "",
-    "typeUser": "secundary"
+    "typeUser": "secundary",
+    "delegate": 10
+}
+{
+    "fullName": "Antonio Rofriguez",
+    "rut": "23015604-6",
+    "telephone": 1123213,
+    "address": "san francisco",
+    "email": "arodriguez@hotmail.com",
+    "password": "123",
+    "accountOwner": "Alberto Peña",
+    "accountRut": "11723156-9",
+    "accountNumber": 213213123123,
+    "bankName": "BICE",
+    "referredBy": "",
+    "typeUser": "secundary",
+    "delegate": 0
 }

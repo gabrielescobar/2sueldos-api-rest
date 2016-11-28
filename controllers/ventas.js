@@ -17,6 +17,11 @@ var EmailCtrl = require('./emails.js');
  "nombrePadre": "25406319-3"
  }*/
 exports.delegateSale = function(req, res) {
+
+    Persona.find({typeUser: 'secundary'}, null, {sort: {delegate: 1}}, function(err, docs) {
+        res.status(200).send({"statusCode": 200, message: docs});
+    });
+    
     var sale = new Delegated({
         dateDelegated:  req.body.dateDelegated,
         rutParent:  req.body.rutParent,
@@ -27,6 +32,7 @@ exports.delegateSale = function(req, res) {
         clientPhone:  req.body.clientPhone,
         clientAddress:  req.body.clientAddress
     });
+
     sale.save(function(err, sales) {
         console.log(err);
         if(err)
